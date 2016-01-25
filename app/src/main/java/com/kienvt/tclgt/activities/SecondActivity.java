@@ -1,8 +1,10 @@
-package com.kienvt.tclgt;
+package com.kienvt.tclgt.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import com.kienvt.tclgt.R;
 
 /**
  * Created by kienvithanh on 1/16/16.

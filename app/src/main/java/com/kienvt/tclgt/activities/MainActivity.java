@@ -1,4 +1,4 @@
-package com.kienvt.tclgt;
+package com.kienvt.tclgt.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.kienvt.tclgt.R;
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
