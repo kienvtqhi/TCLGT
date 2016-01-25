@@ -9,22 +9,24 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.activeandroid.query.Delete;
 import com.kienvt.tclgt.R;
-import com.kienvt.tclgt.models.MOffences;
+import com.kienvt.tclgt.models.MOffence;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by johnvi on 1/24/16.
  */
 public class OffencesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
-    private List<MOffences> mOffences;
+    private List<MOffence> mOffences;
 
-    public OffencesAdapter(Context context, List<MOffences> offences) {
+    public OffencesAdapter(Context context, List<MOffence> offences) {
         super();
         this.mContext = context;
         this.mOffences = offences;
@@ -42,7 +44,7 @@ public class OffencesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         OffencesViewHolder offencesViewHolder = (OffencesViewHolder) holder;
 
-        MOffences offences = mOffences.get(position);
+        MOffence offences = mOffences.get(position);
 
         offencesViewHolder.tvDetail.setText(offences.detail);
         offencesViewHolder.tvMoney.setText(Html.fromHtml(offences.money));
@@ -64,6 +66,24 @@ public class OffencesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(itemView);
 
             ButterKnife.bind(this, itemView);
+        }
+
+        @OnClick(R.id.btn_info)
+        public void onClickButtonInfo() {
+            int position = getAdapterPosition();
+            MOffence offence = mOffences.get(position);
+            new Delete().from(MOffence.class).where("detail = ?", offence.detail).execute();
+            notifyItemRemoved(position);
+        }
+
+        @OnClick(R.id.btn_favorite)
+        public void onClickButtonFavorite() {
+            int position = getAdapterPosition();
+            MOffence offence = mOffences.get(position);
+            offence.detail = offence.detail + " Favorite";
+            offence.save();
+
+            notifyItemChanged(position);
         }
     }
 }
