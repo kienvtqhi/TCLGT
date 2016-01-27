@@ -24,12 +24,14 @@
         <meta-data
             android:name="AA_DB_VERSION"
             android:value="2" />
-
         <meta-data
             android:name="AA_MODELS"
             android:value="com.kienvt.tclgt.models.MOffence" />
 
         <activity android:name=".activities.DBActivity" >
+
+        </activity>
+        <activity android:name=".activities.AsyncTaskActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
