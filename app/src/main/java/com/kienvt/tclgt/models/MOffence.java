@@ -7,14 +7,29 @@ import com.activeandroid.annotation.Table;
 /**
  * Created by johnvi on 1/24/16.
  */
-@Table(name = "Offence")
+@Table(name = "OFFENCES")
 public class MOffence extends Model{
-    @Column
-    public String detail;
+    @Column(name = "offence_id")
+    public int offenceId;
+
+    @Column(name = "category_id")
+    public String categoryId;
 
     @Column
-    public String money;
+    public String name;
 
     @Column
-    public String info;
+    public String description;
+
+    @Column
+    public String law;
+
+    @Column
+    public int bookmark;
+
+    @Column(name = ("unsign_name"))
+    public String unsignName;
+
+    @Column(name = "unsign_des")
+    public String unsignDesc;
 }

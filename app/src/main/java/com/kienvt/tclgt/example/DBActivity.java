@@ -1,4 +1,4 @@
-package com.kienvt.tclgt.activities;
+package com.kienvt.tclgt.example;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 import com.kienvt.tclgt.R;
+import com.kienvt.tclgt.activities.HomeActivity;
 import com.kienvt.tclgt.models.MOffence;
 
 import java.util.List;
@@ -34,9 +35,9 @@ public class DBActivity extends AppCompatActivity {
     @OnClick(R.id.btn_add)
     public void onClickButtonAdd() {
         MOffence offence = new MOffence();
-        offence.detail = edDetail.getText().toString();
-        offence.money = edMoney.getText().toString();
-        offence.info = edInfo.getText().toString();
+//        offence.detail = edDetail.getText().toString();
+//        offence.money = edMoney.getText().toString();
+//        offence.info = edInfo.getText().toString();
 
         offence.save();
 

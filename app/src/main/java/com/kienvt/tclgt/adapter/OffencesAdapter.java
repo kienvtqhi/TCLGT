@@ -46,8 +46,8 @@ public class OffencesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         MOffence offences = mOffences.get(position);
 
-        offencesViewHolder.tvDetail.setText(offences.detail);
-        offencesViewHolder.tvMoney.setText(Html.fromHtml(offences.money));
+        offencesViewHolder.tvDetail.setText(offences.name);
+        offencesViewHolder.tvMoney.setText(Html.fromHtml(offences.description));
     }
 
     @Override
@@ -70,20 +70,12 @@ public class OffencesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         @OnClick(R.id.btn_info)
         public void onClickButtonInfo() {
-            int position = getAdapterPosition();
-            MOffence offence = mOffences.get(position);
-            new Delete().from(MOffence.class).where("detail = ?", offence.detail).execute();
-            notifyItemRemoved(position);
+
         }
 
         @OnClick(R.id.btn_favorite)
         public void onClickButtonFavorite() {
-            int position = getAdapterPosition();
-            MOffence offence = mOffences.get(position);
-            offence.detail = offence.detail + " Favorite";
-            offence.save();
 
-            notifyItemChanged(position);
         }
     }
 }

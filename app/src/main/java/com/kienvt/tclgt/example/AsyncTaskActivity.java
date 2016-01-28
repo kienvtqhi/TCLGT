@@ -1,4 +1,4 @@
-package com.kienvt.tclgt.activities;
+package com.kienvt.tclgt.example;
 
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;

@@ -4,11 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.activeandroid.query.Select;
 import com.kienvt.tclgt.R;
 import com.kienvt.tclgt.adapter.OffencesAdapter;
 import com.kienvt.tclgt.models.DataSource;
+import com.kienvt.tclgt.models.MCategory;
 import com.kienvt.tclgt.models.MOffence;
 
 import java.util.List;
@@ -35,5 +37,8 @@ public class HomeActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(offencesAdapter);
+
+        int countCategories = new Select().from(MCategory.class).execute().size();
+        Log.e("HomeActivity", "Categories: " + countCategories);
     }
 }
