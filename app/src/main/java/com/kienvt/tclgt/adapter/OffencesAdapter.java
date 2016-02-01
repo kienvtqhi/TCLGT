@@ -1,6 +1,16 @@
 package com.kienvt.tclgt.adapter;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.v4.app.ShareCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -48,6 +58,17 @@ public class OffencesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         offencesViewHolder.tvDetail.setText(offences.name);
         offencesViewHolder.tvMoney.setText(Html.fromHtml(offences.description));
+
+        Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_favorite_black_36dp);
+        drawable = DrawableCompat.wrap(drawable);
+        if (offences.bookmark == 1) {
+            // Red color
+            DrawableCompat.setTint(drawable, ContextCompat.getColor(mContext, R.color.red));
+        } else {
+            DrawableCompat.setTint(drawable, Color.BLACK);
+        }
+
+        offencesViewHolder.btnFavorite.setImageDrawable(drawable);
     }
 
     @Override
@@ -70,12 +91,42 @@ public class OffencesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         @OnClick(R.id.btn_info)
         public void onClickButtonInfo() {
-
+            MOffence offence = mOffences.get(getAdapterPosition());
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
+                    .setTitle("Thông Tin")
+                    .setMessage(offence.law)
+                    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            builder.create().show();
         }
 
         @OnClick(R.id.btn_favorite)
         public void onClickButtonFavorite() {
+            MOffence offence = mOffences.get(getAdapterPosition());
+            if (offence.bookmark == 1) {
+                offence.bookmark = 0;
+            } else {
+                offence.bookmark = 1;
+            }
+            offence.save();
+            notifyItemChanged(getAdapterPosition());
+        }
 
+        @OnClick(R.id.btn_share)
+        public void onClickButtonShare() {
+            MOffence offence = mOffences.get(getAdapterPosition());
+            String content = offence.name + "\n\n" + Html.fromHtml(offence.description);
+
+            Intent intent = ShareCompat.IntentBuilder.from((Activity) mContext)
+                    .setType("text/plain")
+                    .setChooserTitle("Chia sẻ")
+                    .setText(content)
+                    .createChooserIntent();
+            mContext.startActivity(intent);
         }
     }
 }

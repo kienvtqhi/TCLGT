@@ -1,5 +1,6 @@
 package com.kienvt.tclgt.activities;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import com.kienvt.tclgt.models.DataSource;
 import com.kienvt.tclgt.models.MCategory;
 import com.kienvt.tclgt.models.MOffence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -30,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        offences = new Select().from(MOffence.class).execute();
+        offences = new ArrayList<>();
         offencesAdapter = new OffencesAdapter(this, offences);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -38,7 +40,26 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(offencesAdapter);
 
+        new LoadOffencesAsyncTask().execute();
+
         int countCategories = new Select().from(MCategory.class).execute().size();
         Log.e("HomeActivity", "Categories: " + countCategories);
+    }
+
+    public class LoadOffencesAsyncTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            List<MOffence> result = new Select().from(MOffence.class).execute();
+
+            if (result != null)
+                offences.addAll(result);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            offencesAdapter.notifyDataSetChanged();
+        }
     }
 }
