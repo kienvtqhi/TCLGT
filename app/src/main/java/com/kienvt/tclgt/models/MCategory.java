@@ -15,5 +15,6 @@ public class MCategory extends Model {
     @Column(name = "parent_id")
     public String parentId;
 
+    @Column
     public String name;
 }

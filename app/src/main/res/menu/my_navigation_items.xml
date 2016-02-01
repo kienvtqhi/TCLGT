@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/motobike"
+            android:checkable="true"
+            android:title="Mô tô, xe gắn máy"></item>
+        <item
+            android:id="@+id/car"
+            android:checkable="true"
+            android:title="Ô tô"></item>
+        <item
+            android:id="@+id/tractor"
+            android:checkable="true"
+            android:title="Máy kéo, xe máy chuyên dùng"></item>
+        <item
+            android:id="@+id/bicycle"
+            android:checkable="true"
+            android:title="Xe đạp, xe đạp máy, xe thô sơ"></item>
+        <item
+            android:id="@+id/passenger_transport"
+            android:checkable="true"
+            android:title="Vận tải hành khách"></item>
+        <item
+            android:id="@+id/special_case"
+            android:checkable="true"
+            android:title="Trường hợp đặc biệt"></item>
+    </group>
+</menu>
